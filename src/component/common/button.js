@@ -7,10 +7,12 @@ class Button extends React.Component {
       button: {
         borderColor: 'rgb(37, 241, 131)',
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 300,
+        marginTop: 45,
+        marginLeft: 80,
+        marginRight: 80,
         height: 40
       },
       textInButton: {
