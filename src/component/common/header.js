@@ -3,20 +3,20 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   header: {
-    height: 50,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0.5 },
-    shadowOpacity: 0.2,
     backgroundColor: '#fff'
+  },
+  text: {
+    fontSize: 20
   }
 });
 
-const Header = () => (
+const Header = (props) => (
   <View style={styles.header}>
-    <Text>Sign in</Text>
+    <Text style={styles.text}>{props.title}</Text>
   </View>
 );
 
