@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  pressPostButton: (detail) => dispatch(pressPostButton(detail))
+  pressPostButton: detail => dispatch(pressPostButton(detail))
 });
 
 const PostConnected = connect(

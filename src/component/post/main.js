@@ -11,6 +11,10 @@ class Post extends React.Component {
     };
   }
 
+  pressPostButton = () => {
+    this.props.pressPostButton(this.state.detail);
+  }
+
   render() {
     const styles = StyleSheet.create({
       tabTitle: {
@@ -40,7 +44,7 @@ class Post extends React.Component {
           />
         </View>
         <PostButton
-          pressPostButton={() => this.props.pressPostButton(this.state.detail)}
+          pressPostButton={this.pressPostButton}
         />
       </View>
     );
