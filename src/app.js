@@ -3,12 +3,10 @@ import { Provider } from 'react-redux';
 import Tabs from './tabs';
 import store from './store/post';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Tabs />
-    </Provider>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <Tabs />
+  </Provider>
+);
 
 export default App;
