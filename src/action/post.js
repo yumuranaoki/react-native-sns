@@ -1,5 +1,5 @@
 //actionを記述
-export const pressPostButton = detail => {
+export const pressPostButton = (place, content) => {
   return dispatch => {
     fetch('http://localhost:3000/post', {
       method: 'POST',
@@ -8,7 +8,8 @@ export const pressPostButton = detail => {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        detail
+        place,
+        content,
       }),
     })
     .then(() => dispatch(successPost()));
