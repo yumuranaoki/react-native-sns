@@ -51,6 +51,7 @@ class Post extends React.Component {
       },
     });
 
+
     return (
       <View>
         <Header title="Post" />

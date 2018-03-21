@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import Tabs from './tabs';
-import store from './store/post';
+import store from './store/main';
 
 const App = () => (
   <Provider store={store}>

@@ -2,14 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, } from 'react-native';
 import Header from '../common/header';
 
-class Post extends React.Component {
+class Feed extends React.Component {
+
+  componentDidMount() {
+    this.props.fetchPost();
+    console.log(this.props.post);
+  }
+
   render() {
-    const data = [
-      { place: '宮古島', content: '卒業旅行で宮古島に行ったよ' },
-      { place: '奄美大島', content: 'サーフトリップ初日' },
-      { place: '奄美大島', content: 'サーフトリップ初日' },
-      { place: '奄美大島', content: 'サーフトリップ初日' },
-    ];
+    const data = this.props.post;
 
     const styles = StyleSheet.create({
       place: {
@@ -49,4 +50,4 @@ class Post extends React.Component {
   }
 }
 
-export default Post;
+export default Feed;
