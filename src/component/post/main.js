@@ -7,12 +7,13 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      detail: ''
+      place: '',
+      content: '',
     };
   }
 
   pressPostButton = () => {
-    this.props.pressPostButton(this.state.detail);
+    this.props.pressPostButton(this.state.place, this.state.content);
   }
 
   render() {
@@ -24,23 +25,50 @@ class Post extends React.Component {
         backgroundColor: '#ddd',
         height: 200,
       },
-      textInput: {
-        height: 250,
-        padding: 20,
+      contentInputView: {
+        height: 210,
         borderBottomWidth: 0.5,
-        borderBottomColor: '#ddd'
+        borderBottomColor: '#ddd',
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+      },
+      contentInput: {
+        height: 190,
+      },
+      placeInputView: {
+        height: 50,
+        borderBottomWidth: 0.5,
+        borderBottomColor: '#ddd',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10
+      },
+      placeInput: {
+        height: 30,
       },
     });
+
 
     return (
       <View>
         <Header title="Post" />
         <View style={styles.image} />
-        <View>
+        <View style={styles.placeInputView}>
           <TextInput
-            style={styles.textInput}
-            multiline placeholder="旅の記録を綴ろう"
-            onChangeText={(text) => this.setState({ detail: { text } })}
+            style={styles.placeInput}
+            placeholder='思い出の場所を記入しよう'
+            onChangeText={text => this.setState({ place: { text } })}
+          />
+        </View>
+        <View style={styles.contentInputView}>
+          <TextInput
+            style={styles.contentInput}
+            multiline
+            placeholder='旅の記録を綴ろう'
+            onChangeText={text => this.setState({ content: { text } })}
           />
         </View>
         <PostButton
