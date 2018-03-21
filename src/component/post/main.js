@@ -1,9 +1,13 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, } from 'react-native';
+import { View, Text, TextInput, StyleSheet,
+        TouchableOpacity, ScrollView, Button, } from 'react-native';
 import PostButton from './postbutton';
-import Header from '../common/header';
 
 class Post extends React.Component {
+  static navigationOptions = {
+    title: 'Post',
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +28,11 @@ class Post extends React.Component {
       image: {
         backgroundColor: '#ddd',
         height: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      imageText: {
+        fontSize: 20,
       },
       contentInputView: {
         height: 210,
@@ -53,9 +62,12 @@ class Post extends React.Component {
 
 
     return (
-      <View>
-        <Header title="Post" />
-        <View style={styles.image} />
+      <ScrollView>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Image')}>
+          <View style={styles.image}>
+            <Text style={styles.imageText}>写真を選択する</Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.placeInputView}>
           <TextInput
             style={styles.placeInput}
@@ -74,7 +86,7 @@ class Post extends React.Component {
         <PostButton
           pressPostButton={this.pressPostButton}
         />
-      </View>
+      </ScrollView>
     );
   }
 }

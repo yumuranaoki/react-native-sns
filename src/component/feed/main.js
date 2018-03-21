@@ -25,10 +25,13 @@ class Feed extends React.Component {
       post: {
         padding: 20
       },
+      view: {
+        marginBottom: 60
+      },
     });
 
     return (
-      <View>
+      <View style={styles.view}>
         <Header title='Feed' />
         <FlatList
           data={data}
