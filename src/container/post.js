@@ -4,7 +4,7 @@ import Post from '../component/post/main';
 import { pressPostButton } from '../action/post';
 
 const mapStateToProps = state => ({
-
+  selectedImages: state.selectedImages
 });
 
 const mapDispatchToProps = dispatch => ({

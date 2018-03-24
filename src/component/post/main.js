@@ -17,7 +17,10 @@ class Post extends React.Component {
   }
 
   pressPostButton = () => {
-    this.props.pressPostButton(this.state.place, this.state.content);
+    this.props.pressPostButton(
+      this.state.place,
+      this.state.content,
+    );
   }
 
   render() {
@@ -59,7 +62,6 @@ class Post extends React.Component {
         height: 30,
       },
     });
-
 
     return (
       <ScrollView>

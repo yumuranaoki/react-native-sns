@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, CameraRoll, StyleSheet } from 'react-native';
+import { Image, ScrollView, CameraRoll, StyleSheet, Dimensions, View, TouchableHighlight } from 'react-native';
 
 class PostImage extends React.Component {
   constructor(props) {
@@ -22,25 +22,43 @@ class PostImage extends React.Component {
       this.setState({ photos: r.edges });
     });
   }
+
+  //複数のimageをselect
+  selectImages = uri => {
+    console.log(uri);
+  }
+
   render() {
+    const width = Dimensions.get('window').width;
     const styles = StyleSheet.create({
+      view: {
+        flexDirection: 'row',
+        flex: 1,
+        flexWrap: 'wrap',
+      },
       image: {
-        width: 300,
+        width: width / 3,
         height: 100,
       }
     });
 
     return (
       <ScrollView>
-        {this.state.photos.map((p, i) => {
-          return (
-            <Image
-              key={i}
-              style={styles.image}
-              source={{ uri: p.node.image.uri }}
-            />
-          );
-        })}
+        <View style={styles.view}>
+          {this.state.photos.map((p, i) => {
+            return (
+              <TouchableHighlight
+                onPress={() => this.selectImages(p.node.image.uri)}
+                key={i}
+              >
+                <Image
+                  style={styles.image}
+                  source={{ uri: p.node.image.uri }}
+                />
+            </TouchableHighlight>
+            );
+          })}
+        </View>
       </ScrollView>
     );
   }
