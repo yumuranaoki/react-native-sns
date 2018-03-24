@@ -3,7 +3,7 @@ import Feed from '../component/feed/main';
 import { fetchPost } from '../action/feed';
 
 const mapStateToProps = state => ({
-  post: state.feedReducer.post
+  post: state.feed.post
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -16,8 +16,6 @@ export const pressPostButton = (place, content) => {
   };
 };
 
-export const successPost = () => {
-  return {
-    type: 'SUCCESS_POST'
-  };
-};
+export const successPost = () => ({
+  type: 'SUCCESS_POST'
+});

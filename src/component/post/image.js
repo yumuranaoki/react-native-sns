@@ -23,11 +23,6 @@ class PostImage extends React.Component {
     });
   }
 
-  //複数のimageをselect
-  selectImages = uri => {
-    console.log(uri);
-  }
-
   render() {
     const width = Dimensions.get('window').width;
     const styles = StyleSheet.create({
@@ -48,7 +43,7 @@ class PostImage extends React.Component {
           {this.state.photos.map((p, i) => {
             return (
               <TouchableHighlight
-                onPress={() => this.selectImages(p.node.image.uri)}
+                onPress={() => this.props.selectImages(p.node.image.uri)}
                 key={i}
               >
                 <Image

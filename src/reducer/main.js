@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import postReducer from './post.js';
 import feedReducer from './feed.js';
+import postImagesReducer from './postImage';
 
 const reducer = combineReducers({
-  feedReducer,
-  postReducer,
+  feed: feedReducer,
+  post: postReducer,
+  postImages: postImagesReducer,
 });
 
 export default reducer;
