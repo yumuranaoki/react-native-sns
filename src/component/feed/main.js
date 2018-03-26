@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, Dimensions, } from 'react-native';
 import Header from '../common/header';
 
 class Feed extends React.Component {
@@ -11,7 +11,7 @@ class Feed extends React.Component {
 
   render() {
     const data = this.props.post;
-
+    const width = Dimensions.get('window').width - 40;
     const styles = StyleSheet.create({
       place: {
         fontSize: 20,
@@ -21,6 +21,10 @@ class Feed extends React.Component {
         borderColor: '#000',
         borderWidth: 1,
         height: 200,
+      },
+      image: {
+        height: width * 0.66,
+        width,
       },
       post: {
         padding: 20
@@ -37,7 +41,10 @@ class Feed extends React.Component {
           data={data}
           renderItem={({ item }) => (
             <View style={styles.post}>
-              <View style={styles.postImg} />
+              <Image
+                style={styles.image}
+                source={{ uri: `http://localhost:3000${item.image_arr.url}` }}
+              />
               <View>
                 <Text style={styles.place}>{item.place}</Text>
               </View>

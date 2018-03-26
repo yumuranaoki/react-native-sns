@@ -1,5 +1,5 @@
 const initialState = {
-  post: [{ place: 'place', content: 'content' }]
+  post: []
 };
 
 const feedReducer = (state = initialState, action) => {

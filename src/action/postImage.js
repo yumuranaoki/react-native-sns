@@ -1,4 +1,4 @@
-export const selectImages = uri => ({
+export const selectImages = image => ({
   type: 'SELECT_IMAGES',
-  uri
+  image
 });

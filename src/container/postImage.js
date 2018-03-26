@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  selectImages: uri => dispatch(selectImages(uri))
+  selectImages: image => dispatch(selectImages(image))
 });
 
 const PostImagesConnected = connect(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet,
-        TouchableOpacity, ScrollView, Button, } from 'react-native';
+        TouchableOpacity, ScrollView, } from 'react-native';
 import PostButton from './postbutton';
 
 class Post extends React.Component {
@@ -20,6 +20,7 @@ class Post extends React.Component {
     this.props.pressPostButton(
       this.state.place,
       this.state.content,
+      this.props.selectedImages,
     );
   }
 

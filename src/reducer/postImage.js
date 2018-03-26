@@ -6,9 +6,9 @@ const postImagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SELECT_IMAGES': {
       const selectedImages = state.selectedImages;
-      const position = selectedImages.indexOf(action.uri);
+      const position = selectedImages.indexOf(action.image);
       if (position === -1) {
-        selectedImages.push(action.uri);
+        selectedImages.push(action.image);
       } else {
         selectedImages.splice(position, 1);
       }

@@ -5,6 +5,7 @@ export const fetchPost = () => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
+        console.log(response);
         return response;
       })
       .then(response => response.json())

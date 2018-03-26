@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, ScrollView, CameraRoll, StyleSheet, Dimensions, View, TouchableHighlight } from 'react-native';
+import { Image, ScrollView, CameraRoll,
+  StyleSheet, Dimensions, View, TouchableHighlight } from 'react-native';
 
 class PostImage extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class PostImage extends React.Component {
           {this.state.photos.map((p, i) => {
             return (
               <TouchableHighlight
-                onPress={() => this.props.selectImages(p.node.image.uri)}
+                onPress={() => this.props.selectImages(p.node.image)}
                 key={i}
               >
                 <Image

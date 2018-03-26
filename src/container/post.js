@@ -4,11 +4,13 @@ import Post from '../component/post/main';
 import { pressPostButton } from '../action/post';
 
 const mapStateToProps = state => ({
-  //selectedImages: state.postImages.selectedImages
+  selectedImages: state.postImages.selectedImages
 });
 
 const mapDispatchToProps = dispatch => ({
-  pressPostButton: (place, content) => dispatch(pressPostButton(place, content))
+  pressPostButton: (place, content, selectedImages) => {
+    dispatch(pressPostButton(place, content, selectedImages));
+  }
 });
 
 const PostConnected = connect(
