@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, } from 'react-native';
+import { View, } from 'react-native';
 import Header from '../common/header';
+import Test from '../test/main';
 
 class Profile extends React.Component {
   render() {
     return (
-      <Header title="Profile" />
+      <View>
+        <Header title="Profile" />
+        <Test />
+      </View>
     );
   }
 }

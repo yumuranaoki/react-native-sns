@@ -1,16 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, } from 'react-native';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 import Header from '../common/header';
 
 class Feed extends React.Component {
 
-  componentDidMount() {
-    this.props.fetchPost();
-    console.log(this.props.post);
-  }
+  keyExtractor = item => item.id;
 
   render() {
-    const data = this.props.post;
     const width = Dimensions.get('window').width - 40;
     const styles = StyleSheet.create({
       place: {
@@ -34,27 +32,57 @@ class Feed extends React.Component {
       },
     });
 
+    const GET_POSTS = gql`
+      {
+        allPost {
+          id
+          place
+          content
+          images {
+            id
+            img
+            url
+          }
+        }
+      }
+    `;
+
     return (
       <View style={styles.view}>
         <Header title='Feed' />
-        <FlatList
-          data={data}
-          renderItem={({ item }) => (
-            <View style={styles.post}>
-              <Image
-                style={styles.image}
-                source={{ uri: `http://localhost:3000${item.image_arr.url}` }}
+        <Query query={GET_POSTS}>
+          {({ loading, error, data }) => {
+            if (loading) return <Text>Loading</Text>;
+            if (error) return <Text>Error</Text>;
+
+            return (
+              <View>
+              <FlatList
+                data={data.allPost}
+                keyExtractor={this.keyExtractor}
+                renderItem={({ item, i }) => {
+                  if (item.images[0] && item.images[0].img) {
+                    return (
+                      <View key={i} style={styles.post}>
+                        <Image
+                          style={styles.image}
+                          source={{ uri: `http://localhost:3000${item.images[0].img}` }}
+                        />
+                        <View>
+                          <Text style={styles.place}>{item.place}</Text>
+                        </View>
+                        <View>
+                          <Text>{item.content}</Text>
+                        </View>
+                      </View>
+                    );
+                  }
+                }}
               />
-              <View>
-                <Text style={styles.place}>{item.place}</Text>
-              </View>
-              <View>
-                <Text>{item.content}</Text>
-              </View>
             </View>
-            )
-          }
-        />
+            );
+          }}
+        </Query>
       </View>
     );
   }
