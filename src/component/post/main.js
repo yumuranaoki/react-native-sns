@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet,
-        TouchableOpacity, ScrollView, } from 'react-native';
+        TouchableOpacity, ScrollView, Button, } from 'react-native';
+import { Mutation } from 'react-apollo';
 import PostButton from './postbutton';
+import { CREATE_POST } from '../graphql/mutation';
 
 class Post extends React.Component {
   static navigationOptions = {
@@ -16,6 +18,7 @@ class Post extends React.Component {
     };
   }
 
+  //imageをpostできれば完全にreplace
   pressPostButton = () => {
     this.props.pressPostButton(
       this.state.place,
@@ -65,31 +68,39 @@ class Post extends React.Component {
     });
 
     return (
-      <ScrollView>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Image')}>
-          <View style={styles.image}>
-            <Text style={styles.imageText}>写真を選択する</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={styles.placeInputView}>
-          <TextInput
-            style={styles.placeInput}
-            placeholder='思い出の場所を記入しよう'
-            onChangeText={text => this.setState({ place: { text } })}
-          />
-        </View>
-        <View style={styles.contentInputView}>
-          <TextInput
-            style={styles.contentInput}
-            multiline
-            placeholder='旅の記録を綴ろう'
-            onChangeText={text => this.setState({ content: { text } })}
-          />
-        </View>
-        <PostButton
-          pressPostButton={this.pressPostButton}
-        />
-      </ScrollView>
+      <Mutation mutation={CREATE_POST}>
+        {(createPost, { data }) => (
+          <ScrollView>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Image')}>
+              <View style={styles.image}>
+                <Text style={styles.imageText}>写真を選択する</Text>
+              </View>
+            </TouchableOpacity>
+            <View style={styles.placeInputView}>
+              <TextInput
+                style={styles.placeInput}
+                placeholder='思い出の場所を記入しよう'
+                onChangeText={text => this.setState({ place: { text } })}
+              />
+            </View>
+            <View style={styles.contentInputView}>
+              <TextInput
+                style={styles.contentInput}
+                multiline
+                placeholder='旅の記録を綴ろう'
+                onChangeText={text => this.setState({ content: { text } })}
+              />
+            </View>
+            <PostButton
+              pressPostButton={() => {
+                createPost({
+                  variables: { place: this.state.place.text, content: this.state.content.text }
+                });
+              }}
+            />
+          </ScrollView>
+        )}
+      </Mutation>
     );
   }
 }
