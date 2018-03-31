@@ -1,9 +1,15 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet,
-        TouchableOpacity, ScrollView, Button, } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button,
+        TouchableOpacity, ScrollView, Dimensions, ImageEditor, ImageStore, } from 'react-native';
 import { Mutation } from 'react-apollo';
 import PostButton from './postbutton';
 import { CREATE_POST } from '../graphql/mutation';
+
+//画像の大きさを指定
+const getHeight = () => {
+  const { height, width } = Dimensions.get('window');
+  return [height, width];
+};
 
 class Post extends React.Component {
   static navigationOptions = {
@@ -15,16 +21,51 @@ class Post extends React.Component {
     this.state = {
       place: '',
       content: '',
+      base64: '',
     };
   }
 
+  componentDidMount() {
+    console.log(this.props.selectedImages[0]);
+  }
+
   //imageをpostできれば完全にreplace
+  /*
   pressPostButton = () => {
     this.props.pressPostButton(
       this.state.place,
       this.state.content,
       this.props.selectedImages,
     );
+  }
+  */
+
+  //これをimageを選択するタイミングで実行する
+  async pressPostButton() {
+    if (this.props.selectedImages[0]) {
+      const dimensions = await getHeight();
+      const hi = await dimensions[0];
+      const wi = await dimensions[1];
+      const cropData = await {
+        offset: { x: 0, y: 0 },
+        size: { width: wi - 100, height: hi - 100 }
+      };
+      await ImageEditor.cropImage(
+        this.props.selectedImages[0].uri,
+        cropData,
+        uri => {
+          console.log(uri);
+          ImageStore.getBase64ForTag(uri,
+            base64 => {
+              this.setState({ base64 });
+              ImageStore.removeImageForTag(uri);
+            },
+            err => console.log(err)
+          );
+        },
+        err => console.log(err.message)
+      );
+    }
   }
 
   render() {
@@ -93,11 +134,13 @@ class Post extends React.Component {
             </View>
             <PostButton
               pressPostButton={() => {
+                this.pressPostButton();
                 createPost({
                   variables: { place: this.state.place.text, content: this.state.content.text }
                 });
               }}
             />
+          <Button title='Button' onPress={() => console.log(this.state.base64)} />
           </ScrollView>
         )}
       </Mutation>
