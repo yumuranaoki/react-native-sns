@@ -21,7 +21,6 @@ class Post extends React.Component {
     this.state = {
       place: '',
       content: '',
-      base64: '',
     };
   }
 
@@ -134,13 +133,16 @@ class Post extends React.Component {
             </View>
             <PostButton
               pressPostButton={() => {
-                this.pressPostButton();
                 createPost({
-                  variables: { place: this.state.place.text, content: this.state.content.text }
+                  variables: {
+                    place: this.state.place.text,
+                    content: this.state.content.text,
+                    img: this.props.base64,
+                  }
                 });
               }}
             />
-          <Button title='Button' onPress={() => console.log(this.state.base64)} />
+          <Button title='Button for base64' onPress={() => console.log(this.props.base64)} />
           </ScrollView>
         )}
       </Mutation>

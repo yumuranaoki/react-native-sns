@@ -40,8 +40,6 @@ class Feed extends React.Component {
           content
           images {
             id
-            img
-            url
           }
         }
       }
@@ -61,12 +59,12 @@ class Feed extends React.Component {
                 data={data.allPost}
                 keyExtractor={this.keyExtractor}
                 renderItem={({ item, i }) => {
-                  if (item.images[0] && item.images[0].img) {
+                  if (item.images[0] && item.images[0].id) {
                     return (
                       <View key={i} style={styles.post}>
                         <Image
                           style={styles.image}
-                          source={{ uri: `http://localhost:3000${item.images[0].img}` }}
+                          source={{ uri: `http://localhost:3000/images/${item.id}` }}
                         />
                         <View>
                           <Text style={styles.place}>{item.place}</Text>

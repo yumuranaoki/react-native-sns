@@ -1,5 +1,6 @@
 const initialState = {
-  selectedImages: []
+  selectedImages: [],
+  base64: ''
 };
 
 const postImagesReducer = (state = initialState, action) => {
@@ -14,6 +15,9 @@ const postImagesReducer = (state = initialState, action) => {
       }
       console.log(selectedImages);
       return Object.assign({}, state, { selectedImages });
+    }
+    case 'GET_BASE64': {
+      return Object.assign({}, state, { base64: action.base64 });
     }
     default:
       return state;
